@@ -1,0 +1,124 @@
+<div class="card shadow rounded-0 p-3">
+  <div class="d-flex justify-content-between mb-2">
+    <h3>Manage Users</h3>
+  </div>
+  <div class="profile-title">
+
+  <form #formRef="ngForm" [formGroup]="signupForm">
+  <div class="row">
+    <div class="col">
+        <div class="form-row">
+          <div class="col-4">
+            <div class="form-group">
+                  <label>UserId</label>
+                  <input class="form-control" type="text" formControlName="userName" placeholder="Enter UserId">
+              </div>
+              <div *ngIf="signupForm.get('userName').errors && isSubmitted">
+                <div *ngIf="signupForm.get('userName').hasError('required')">
+                  <span style="color: red;">Field is required.</span>
+                </div>
+              </div>
+          </div>
+          <div class="col-4" *ngIf="!isUpdateField">
+              <div class="form-group">
+                  <label>Password</label>
+                  <input class="form-control" type="text" formControlName="password" placeholder="Enter Password">
+              </div>
+              <div *ngIf="signupForm.get('password').errors && isSubmitted">
+                <div *ngIf="signupForm.get('password').hasError('required')">
+                  <span style="color: red;">Field is required.</span>
+                </div>
+              </div>
+          </div>
+          <div class="col-4"*ngIf="!isUpdateField">
+            <div class="form-group">
+                <label>Conform Password</label>
+                <input class="form-control" type="password" formControlName="confirmPassword" placeholder="Conform Password">
+            </div>
+            <div *ngIf="signupForm.get('confirmPassword').errors && isSubmitted">
+              <div *ngIf="signupForm.get('confirmPassword').hasError('required')">
+                <span style="color: red;">Field is required</span>
+              </div>
+              <div *ngIf="signupForm.get('password').hasError('MustMatch')">
+                <span style="color: red;">Password not match.</span>
+              </div>
+            </div>
+        </div>
+              <div class="col-4">
+                <div class="form-group">
+                      <label>Role</label>
+                      <select class="form-control" formControlName="role">
+                        <option value="">Select Role</option>
+                        <option value="admin">Admin</option>
+                        <option value="superAdmin">Super Admin</option>
+                        <option value="anonymousUser">Anonymous User</option>
+                      </select>
+                  </div>
+                  <div *ngIf="signupForm.get('role').errors && isSubmitted">
+                    <div *ngIf="signupForm.get('role').hasError('required')">
+                      <span style="color: red;">Field is required.</span>
+                    </div>
+                  </div>
+              </div>
+               <div class="col-4">
+                <div class="form-group">
+                      <label>Valid Till</label>
+                      <select class="form-control" formControlName="validTill">
+                        <option value="">Select Valid Upto</option>
+                        <option value="30">1 month</option>
+                        <option value="90">3 months</option>
+                        <option value="180">6 months</option>
+                         <option value="360">1 year</option>
+                      </select>
+                  </div>
+                  <div *ngIf="signupForm.get('validTill').errors && isSubmitted">
+                    <div *ngIf="signupForm.get('validTill').hasError('required')">
+                      <span style="color: red;">Field is required.</span>
+                    </div>
+                  </div>
+              </div>
+              <div class="col-12">
+                <button class="btn btn-dark ml-2s" *ngIf="!isUpdateField" (click)="signup()"  style="margin-right: 2px;" type="submit">Submit</button>
+                <button class="btn btn-dark ml-2" *ngIf="isUpdateField" (click)="updateCat()"  style="margin-right: 2px;" type="submit">Update</button>
+                <button class="btn btn-dark ml-2"  (click)="resetForm()">Cancel</button>
+              </div>
+          </div>
+      </div>
+  </div>
+  </form>
+
+  <div class="row">
+    <div class="col">
+        <table class="table table-bordered mt-3">
+            <thead class="bg-dark text-white">
+                <tr>
+                    <th>S.N.</th>
+                      <th>User NAme</th>
+                      <th>Role</th>
+                      <th>Created At</th>
+                      <th>Valid Till</th>
+                      <th></th>
+                  </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of users | paginate:{itemsPerPage: 10, currentPage: p ,totalItems: Count  };let i =index">
+                    <td>{{i+1}}</td>
+                      <td>{{item.userName}}</td>
+                      <td>{{item.role}}</td>
+                      <td>{{item.createAt |date}}</td>
+                      <td>{{item.validTill |date}}</td>
+                      <td class="text-center">
+                        <a onmouseover="" style="cursor: pointer;" (click)="editUser(item)"><span class="material-icons">create</span></a>
+                        <a onmouseover="" style="cursor: pointer;" (click)="deleteUser(item)"><span class="material-icons">delete</span></a>
+                       </td>
+                </tr>
+              </tbody>
+          </table>
+          <div class="row">
+            <div class="col text-right">
+              <pagination-controls (pageChange)="p = $event; getAllUsers($event)" class="my-pagination"></pagination-controls>
+            </div>
+          </div>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,132 @@
+<div class="container-fluid bg-dark py-2">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-white d-flex justify-content-between">
+        <small>You are seeing our catalogue in <strong>Delhi - 110041</strong></small>
+        <small><span class="material-icons">phone_iphone</span> +91 98765432100</small>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container">
+    <a class="navbar-brand" href="#"><img src="../../assets/images/logo.png" height="30" alt=""></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        <li><input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"></li>
+        <li class="nav-item active">
+          <a class="nav-link" href="javascript:void(0);" data-toggle="modal" data-target="#login"><span
+              class="material-icons">person</span> Signin/Singhup</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/cart"><span class="material-icons">shopping_cart</span> Cart({{cartItems}})</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<router-outlet></router-outlet>
+
+<div class="container-fluid bg-dark py-3 text-white">
+  <div class="container">
+      <div class="row py-4 my-5" style="background: rgba(255,255,255,0.04)">
+          <div class="col-12 col-lg-4 d-flex justify-content-start">
+              <span class="material-icons icon-size mr-3">local_offer</span>
+              <span>
+                  <h6>Best Prices &amp; Offers</h6>
+                  <small>Cheaper prices than your local supermarket, great cashback offers to top it off.</small>
+              </span>
+          </div>
+          <div class="col-12 col-lg-4 d-flex justify-content-start">
+              <span class="material-icons icon-size mr-3">business_center</span>
+              <span>
+                  <h6>Wide Assortment</h6>
+                  <small>Choose from 5000+ products across food, personal care, household &amp; other categorie</small>
+              </span>
+          </div>
+          <div class="col-12 col-lg-4 d-flex justify-content-start">
+              <span class="material-icons icon-size mr-3">refresh</span>
+              <span>
+                  <h6>Easy Returns</h6>
+                  <small>Not satisfied with a product? Return it at the doorstep &amp; get a refund within hours.</small>
+              </span>
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-12 col-lg-3">
+              <h5 class="mb-3">Jiyo Basket</h5>
+              <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+              <p>Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+          </div>
+          <div class="col-12 col-lg-3">
+              <h5 class="mb-3">Fresh Fruit</h5>
+              <ul class="list">
+                  <a href="#">Apple</a>
+                  <a href="#">Banana</a>
+                  <a href="#">Pineapple</a>
+                  <a href="#">Orange</a>
+              </ul>
+          </div>
+          <div class="col-12 col-lg-3">
+              <h5 class="mb-3">Products</h5>
+              <ul class="list">
+                  <a class="dropdown-item" href="#">Fresh Vegitable</a>
+                    <a href="#">Onion</a>
+                    <a href="#">Tomato</a>
+                    <a href="#">Potato</a>
+                    <a href="#">Lauki</a>
+                    <a href="#">Capsicum</a>
+              </ul>
+          </div>
+          <div class="col-12 col-lg-3">
+              <h5 class="mb-3">Contact</h5>
+              <ul class="list">
+                  <a href="#"><span class="material-icons">phone_iphone</span> +44 (0)7452056594</a>
+                  <a href="#"><span class="material-icons">mail_outline</span> sales@jiyobasket.com</a>
+                  <a href="#"><span class="material-icons">mail_outline</span> complaint@jiyobasket.com</a>
+                  <a href="#"><span class="material-icons">mail_outline</span> support@jiyobasket.com</a>
+                  <a href="#"><span class="material-icons">business</span> Company Number 12740229</a>
+              </ul>
+          </div>
+      </div>
+      <div class="row py-3" style="background: rgba(255,255,255,0.04)">
+          <div class="col">Copyright &copy; 2020. jiyobasket.com</div>
+      </div>
+  </div>
+</div>
+
+
+      <!-- Modal -->
+      <div class="modal fade" id="login" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                  <label>Mobile Number</label>
+                  <input type="text" class="form-control" placeholder="Enter Mobile Number">
+                </div>
+                <div class="form-group">
+                  <label>OTP (one time Password)</label>
+                  <input type="text" class="form-control" placeholder="Enter OTP">
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Get OTP</button>
+            </div>
+          </div>
+        </div>
+      </div>

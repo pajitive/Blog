@@ -1,0 +1,39 @@
+<div class="warpper">
+  <div class="left">
+      <span class="text-center">
+        <img src="../../assets/images/logo1.jpeg" class="img-allign" alt="">
+        </span>
+    <ul class="menu">
+      <li class=""><a routerLink="blog"><span class="material-icons">create</span> Post Blog</a></li>
+      <li *ngIf="currentUser.role =='superAdmin'"><a routerLink="add-category"><span class="material-icons">business_center</span> Category</a></li>
+      <li *ngIf="currentUser.role =='superAdmin'"><a routerLink="add-sub-category"><span class="material-icons">description</span> Sub Category</a></li>
+      <li *ngIf="currentUser.role =='superAdmin'"><a routerLink="add-fiels-category"><span class="material-icons">description</span> Field Category</a></li>
+      <li *ngIf="currentUser.role =='superAdmin'"><a routerLink="add-blog-title"><span class="material-icons">description</span> Add Blog Title</a></li>
+      <li *ngIf="currentUser.role =='superAdmin'"><a routerLink="manage-users"><span class="material-icons">person</span> Manage Users</a></li>
+      <li><a (click)="logOut()"><span class="material-icons">power_settings_new</span> Logout</a></li>
+    </ul>
+  </div>
+  <div class="right">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Welcome!! <strong class="text-primary">{{currentUser?.userName}}</strong>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" >Profile</a>
+              <a class="dropdown-item" routerLink="change-password">Change Password</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" (click)="logOut()">Logout</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="p-4">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,8 @@
+.bg-white {
+  background-color: #1718191c!important;
+}
+img.w-50.mb-4.img-allign {
+  text-align: center;
+  margin-left: 50px;
+  height: 100px;
+}

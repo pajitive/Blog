@@ -1,0 +1,81 @@
+<div class="card shadow rounded-0 p-3">
+  <div class="d-flex justify-content-between mb-2">
+    <h3>Add Sub Category</h3>
+  </div>
+  <form [formGroup]="subCatForm">
+    <div class="row">
+      <div class="col">
+          <div class="form-row">
+            <div class="col">
+              <div class="form-group">
+                <label>Select Category</label>
+                <select class="form-control" formControlName="category">
+                  <option value="">Select Category</option>
+                  <option *ngFor="let i of categories" value="{{i._id}}">{{i.name}}</option>
+                </select>
+            </div>
+            <div *ngIf="subCatForm.get('category').errors && isSubmitted">
+              <div *ngIf="subCatForm.get('category').hasError('required')">
+                <span style="color: red;">Please select category.</span>
+              </div>
+            </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                    <label> Sub Category Name</label>
+                    <input type="text" class="form-control" placeholder="Enter Sub Category" formControlName="name">
+                </div>
+                <div *ngIf="subCatForm.get('name').errors && isSubmitted">
+                  <div *ngIf="subCatForm.get('name').hasError('required')">
+                    <span style="color: red;">Please enter sub-category title.</span>
+                  </div>
+                </div>
+            </div>
+            <div class="col-12">
+              <div class="form-group">
+                  <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="customCheck1" formControlName="isActive">
+                      <label class="custom-control-label" for="customCheck1"> Active</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+              <button class="btn btn-dark ml-2" *ngIf="!isUpdateField" (click)="saveSubCategories()" style="margin-right: 2px;" type="submit">Submit</button>
+              <button class="btn btn-dark ml-2" *ngIf="isUpdateField" (click)="updateSubCat()" style="margin-right: 2px;" type="submit">Update</button>
+              <button class="btn btn-dark ml-2"  (click)="resetForm()">Cancel</button>
+            </div>
+        </div>
+        </div>
+    </div>
+</form>
+  <div class="row">
+    <div class="col">
+        <table class="table table-bordered mt-3">
+            <thead class="bg-dark text-white">
+                <tr>
+                    <th>Category</th>
+                    <th> Sub Category</th>
+                      <th>Status</th>
+                      <th></th>
+                  </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let i of subCats | paginate:{itemsPerPage: 10, currentPage: p ,totalItems: Count  };">
+                    <td>{{i.category.name}}</td>
+                    <td>{{i.name}}</td>
+                      <td><span [ngClass]="i.isActive ? 'badge badge-success': 'badge badge-danger'" (click)="changeStatus(i)">{{i.isActive ? 'Active': 'Inactive'}}</span></td>
+                      <td class="text-center">
+                        <a onmouseover="" style="cursor: pointer;" (click)="editCategory(i)"><span class="material-icons">create</span></a>
+                        <a onmouseover="" style="cursor: pointer;" (click)="deleteCategory(i)"><span class="material-icons">delete</span></a>
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
+          <div class="row">
+            <div class="col text-right">
+              <pagination-controls (pageChange)="p = $event; getSubCats($event)" class="my-pagination"></pagination-controls>
+            </div>
+          </div>
+      </div>
+  </div>
+</div>

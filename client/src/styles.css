@@ -1,0 +1,108 @@
+
+/* ----------header css------------ */
+
+html {  scroll-behavior: smooth;}
+body{}
+ul{ margin:0; padding: 0; list-style-type: none}
+h1, h2, h3, h4, h5, h6{}
+.material-icons{ vertical-align: middle;}
+
+.bg{ background:url("./assets/images/background.png") repeat fixed}
+.list a{ display:block; padding: 4px 0; color: #999}
+
+/* ----------header css------------ */
+
+/* --------css for dashbord------- */
+
+ul{ margin:0; padding:0; list-style-type:none;}
+.material-icons{ vertical-align:middle}
+
+.warpper{ height:100vh}
+.left{ background:#5d6977db;; width:300px; padding:15px; position:fixed; top:-6px; left:0; height:100%; z-index:9999 !important}
+.right{ width:calc(100% - 300px); margin-left:300px; padding-top:60px;}
+
+.menu{ margin-top:30px;}
+.menu li{  border-bottom:1px solid rgba(255,255,255,0.1)}
+.menu li:last-child{ border-bottom:0}
+.menu li a{ display:block; color:#fff; padding:8px 0 8px 15px;}
+.menu li.active a{ background:rgba(255,255,255,0.2); border-radius:4px; color:#000}
+.bg {    background: url("./assets/images/background_img.jpg") repeat fixed;}
+
+
+/* Tree View*/
+.tree li {
+    list-style-type:none;
+    margin:0;
+    padding:10px 5px 0 5px;
+    position:relative
+}
+.tree li::before,
+.tree li::after {
+    content:'';
+    left:-20px;
+    position:absolute;
+    right:auto
+}
+.tree li::before {
+    border-left:2px solid #000;
+    bottom:50px;
+    height:100%;
+    top:0;
+    width:1px
+}
+.tree li::after {
+    border-top:2px solid #000;
+    height:20px;
+    top:25px;
+    width:25px
+}
+.tree li span {
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    border:2px solid #000;
+    border-radius:3px;
+    display:inline-block;
+    padding:3px 8px;
+    text-decoration:none;
+    cursor:pointer;
+}
+.tree>ul>li::before,
+.tree>ul>li::after {
+    border:0
+}
+.tree li:last-child::before {
+    height:27px
+}
+.tree li span:hover {
+    background: hotpink;
+    border:2px solid #94a0b4;
+    }
+
+[aria-expanded="false"] > .expanded,
+[aria-expanded="true"] > .collapsed {
+  display: none;
+}
+
+/* --------css for dashbord------- */
+
+.btn.btn-color {
+  background-color: #a09d9b;
+}
+
+img.loader-spiner {
+  width: 50%;
+  margin: 0 auto;
+  position: relative;
+  left: 28%;
+  margin-top: -5%;
+}
+
+.custom-control-input:checked~.custom-control-label::before {
+  color: #fff;
+  border-color: #1a1a1b;
+  background-color: #101010;
+}
+.my-pagination /deep/ .ngx-pagination .current {
+  background: black;
+}
+

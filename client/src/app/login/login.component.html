@@ -1,0 +1,17 @@
+<div class="d-flex justify-content-center align-items-center vh-100">
+  <div class="w-25 bg-white p-4 shadow">
+      <img src="../../assets/images/imageedit_7_9566211469.png" class="w-50 mb-4 img-allign" alt="">
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
+       <div class="form-group">
+          <!-- <label>User Name</label> -->
+          <input class="form-control" type="text" formControlName="userName" placeholder="Enter Username">
+        </div>
+        <div class="form-group">
+          <!-- <label>Password</label> -->
+          <input class="form-control" type="password" formControlName="password" placeholder="Enter Password">
+        </div>
+        <button class="btn btn-color" style="margin-right: 2px;" type="submit">Login</button>
+        <!-- <button class="btn btn-color" routerLink="signup">SignUp</button> -->
+      </form>
+    </div>
+</div>

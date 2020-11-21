@@ -1,0 +1,138 @@
+<div class="card shadow rounded-0 p-3">
+  <div class="d-flex justify-content-between mb-2">
+    <h3>Post Blog</h3>
+  </div>
+  <div class="profile-title">
+
+  <form #formRef="ngForm" [formGroup]="blogForm">
+  <div class="row">
+    <div class="col">
+        <div class="form-row">
+              <div class="col-4">
+                <div class="form-group">
+                      <label>Category</label>
+                      <select class="form-control" formControlName="category" (change)="changeCategory($event)">
+                        <option value="">Select Category</option>
+                        <option *ngFor="let item of categories" [value]="item._id">{{item.name}}</option>
+                      </select>
+                  </div>
+                  <div *ngIf="blogForm.get('category').errors && isSubmitted">
+                    <div *ngIf="blogForm.get('category').hasError('required')">
+                      <span style="color: red;">Please select category.</span>
+                    </div>
+                  </div>
+              </div>
+              <div class="col-4">
+                <div class="form-group">
+                      <label>Sub-Category</label>
+                      <select class="form-control" formControlName="subCat" (change)="changeSubCategory($event)">
+                        <option value="null">Select Sub-Category</option>
+                        <option *ngFor="let item of subCats" [value]="item._id">{{item.name}}</option>
+                      </select>
+                  </div>
+                  <!-- <div *ngIf="blogForm.get('subCat').errors && isSubmitted">
+                    <div *ngIf="blogForm.get('subCat').hasError('required')">
+                      <span style="color: red;">Please select sub-category.</span>
+                    </div>
+                  </div> -->
+              </div>
+              <div class="col-4">
+                <div class="form-group">
+                      <label>Field-Sub-Category</label>
+                      <select class="form-control" formControlName="fieldSubCats">
+                        <option value="null">Select Field-Sub-Category</option>
+                        <option *ngFor="let item of fieldSubCats" [value]="item._id">{{item.name}}</option>
+                      </select>
+                  </div>
+              </div>
+              <div class="col-12">
+                <div class="form-group">
+                      <label>Blog Title</label>
+                      <input type="text" class="form-control" placeholder="Enter Blog Title" formControlName="title">
+                  </div>
+                  <div *ngIf="blogForm.get('title').errors && isSubmitted">
+                    <div *ngIf="blogForm.get('title').hasError('required')">
+                      <span style="color: red;">Please enter blog title.</span>
+                    </div>
+                  </div>
+              </div>
+              <div class="col-12">
+                <div class="form-group">
+                    <label>Description</label>
+                    <p-editor formControlName="description" [style]="{'height':'250px'}"></p-editor>
+                </div>
+                <div *ngIf="blogForm.get('description').errors && isSubmitted">
+                  <div *ngIf="blogForm.get('description').hasError('required')">
+                    <span style="color: red;">Please write your blog.</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-group" *ngIf="isShowComment && currentUser.role !=='superAdmin'">
+                    <label>Comment</label>
+                    <textarea [readonly]="true" class="form-control" formControlName="comment" placeholder="Enter Comment"></textarea>
+                </div>
+                <div class="form-group" *ngIf="currentUser.role ==='superAdmin'">
+                  <label>Comment</label>
+                  <textarea  class="form-control" formControlName="comment" placeholder="Enter Comment"></textarea>
+              </div>
+              </div>
+              <div class="col-12" *ngIf="currentUser.role ==='superAdmin'">
+                <div class="form-group">
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="customCheck1" formControlName="isActive">
+                        <label class="custom-control-label" for="customCheck1"> Active</label>
+                    </div>
+                  </div>
+              </div>
+              <div class="col-12">
+                <button class="btn btn-dark ml-2s" *ngIf="!isUpdateField" (click)="saveBlog()" style="margin-right: 2px;" type="submit">Submit</button>
+                <button class="btn btn-dark ml-2" *ngIf="isUpdateField" (click)="updateBlog()" style="margin-right: 2px;" type="submit">Update</button>
+                <button class="btn btn-dark ml-2"  (click)="resetForm()">Cancel</button>
+              </div>
+          </div>
+      </div>
+  </div>
+  </form>
+
+  <div class="row">
+    <div class="col">
+        <table class="table table-bordered mt-3">
+            <thead class="bg-dark text-white">
+                <tr>
+                    <th>Title</th>
+                      <th>Category</th>
+                      <th>Sub-Category</th>
+                      <th>Field-Sub-Category</th>
+                      <th>Blogger</th>
+                      <th *ngIf="currentUser.role ==='superAdmin'">Status</th>
+                      <th></th>
+                  </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of blogs | paginate:{itemsPerPage: 10, currentPage: p ,totalItems: Count  };">
+                    <td>{{item.title}}</td>
+                      <td>{{item.category?.name}}</td>
+                      <td>{{item.subCat?.name}}</td>
+                      <td>{{item.fieldSubCats?.name}}</td>
+                      <td>{{item.blogger?.userName}}</td>
+                      <td *ngIf="currentUser.role ==='superAdmin'"><span [ngClass]="item.isActive ? 'badge badge-success': 'badge badge-danger'" (click)="changeStatus(item)">{{item.isActive ? 'Active': 'Inactive'}}</span></td>
+                      <td class="text-center" *ngIf="currentUser.role !=='superAdmin'">
+                        <a *ngIf="!item.isActive" onmouseover="" style="cursor: pointer;" (click)="editBlog(item)"><span class="material-icons">create</span></a>
+                        <a *ngIf="!item.isActive" onmouseover="" style="cursor: pointer;" (click)="deleteBlog(item)"><span class="material-icons">delete</span></a>
+                      </td>
+                      <td class="text-center" *ngIf="currentUser.role ==='superAdmin'">
+                        <a  onmouseover="" style="cursor: pointer;" (click)="editBlog(item)"><span class="material-icons">create</span></a>
+                        <a  onmouseover="" style="cursor: pointer;" (click)="deleteBlog(item)"><span class="material-icons">delete</span></a>
+                      </td>
+                </tr>
+              </tbody>
+          </table>
+          <div class="row">
+            <div class="col text-right">
+              <pagination-controls (pageChange)="p = $event; getBlogs($event)" class="my-pagination"></pagination-controls>
+            </div>
+          </div>
+      </div>
+  </div>
+</div>
